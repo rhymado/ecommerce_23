@@ -12,9 +12,13 @@ const mainRouter = require("express").Router();
 const pingRouter = require("./ping");
 const productRouter = require("./products");
 const categoryRouter = require("./categories");
+const userRouter = require("./users");
+const authRouter = require("./auth");
 
 mainRouter.use("/", pingRouter);
 mainRouter.use("/products", productRouter);
 mainRouter.use("/categories", categoryRouter);
+mainRouter.use("/users", userRouter);
+mainRouter.use("/auth", authRouter);
 
 module.exports = mainRouter;

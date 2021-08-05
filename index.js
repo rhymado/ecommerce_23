@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const logger = require("morgan");
+const cors = require("cors");
 
 const mainRouter = require("./src/routers");
 
@@ -12,6 +13,11 @@ app.use(express.urlencoded({ extended: false })); // memasang middleware parsing
 app.use(express.json()); // memasang middleware parsing raw json
 app.use(logger("dev"));
 
+app.use(express.static("public"));
+
+// 1. app.use(cors());
+// 2. app.options("*")
+// 3. buat middleware untuk handle method options
 app.use(mainRouter);
 
 // BASE URL => http://localhost:8000
