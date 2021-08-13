@@ -21,6 +21,22 @@ const createNewUser = (body) => {
   });
 };
 
+const createNewUserAsync = async (body) => {
+  try {
+    const qs = "INSERT INTO users SET ?";
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(body.password, salt);
+    const userData = {
+      ...body,
+      password: hash,
+    };
+    const result = await db.query(qs, userData);
+    return { error: null, result };
+  } catch (error) {
+    return { error, result: [] };
+  }
+};
+
 const updatePassword = (body, id) => {
   return new Promise((resolve, reject) => {
     const { oldPass, newPass } = body;
@@ -48,5 +64,6 @@ const updatePassword = (body, id) => {
 
 module.exports = {
   createNewUser,
+  createNewUserAsync,
   updatePassword,
 };
