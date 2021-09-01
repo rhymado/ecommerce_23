@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: false })); // memasang middleware parsing
 app.use(express.json()); // memasang middleware parsing raw json
 app.use(logger("dev"));
 
+app.use(cors());
 app.use(express.static("public"));
 
 // 1. app.use(cors());
